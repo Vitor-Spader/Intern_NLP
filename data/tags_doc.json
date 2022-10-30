@@ -1,0 +1,9 @@
+{
+    "rg": ["rg", "identidade", "ID"],
+    "cpf": ["cpf"],
+    "passaport": ["passaport"],
+    "pis": ["pis"], 
+    "matricul": ["matricul", "matr\u00edcul"],
+    "nasc": ["nasc"],
+    "sus": [ ["sus", "cart"],["su","carta"]]
+}

@@ -1,0 +1,6 @@
+dictionary{
+    "det":["quanto_arq"/"quanto_disp"]
+    "docs":[?]
+    "disp":["disp","smart","comput","cel"]
+    "disp_ID":[any]
+}
