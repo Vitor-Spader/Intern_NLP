@@ -83,9 +83,7 @@ def return_question(token_phrase):
                 if x in token_phrase:
                     question = word_related(token_phrase,question)
                     for x in list_disp:
-                        print(x)
                         if x in token_phrase:
-                            print(x)
                             question["ID_disp"].append(x)
                             break
                     break
@@ -109,9 +107,7 @@ def return_question(token_phrase):
                 if x in token_phrase:
                     question = word_related(token_phrase,question)
                     for x in list_disp:
-                        print(x)
                         if x in token_phrase:
-                            print(x)
                             question["ID_disp"].append(x)
                             break
                     break
