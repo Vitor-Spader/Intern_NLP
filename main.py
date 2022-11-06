@@ -3,7 +3,9 @@ from phrase_nlp import phrase_nlp
 import json
 
 #phrase = input("Digite a requisição: ")
-phrase = "Quanto computador 123456 possuem documentos com data de nascimento e cartao do sus?"
+phrase = "Quantos documentos com cpf e rg existem no computador 123456 e quais celulares possuem arquivos com cartão do sus e data de nascimento?"
+#phrase = "Quanto documentos com rg e cpf existem no sistema?"
+
 
 def error(phrase):
     p = []

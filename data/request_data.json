@@ -1,1 +1,1 @@
-{"det": ["quanto_disp"], "docs": ["nasc"], "disp": [], "ID_disp": ["123456"]}
+{"intent": [{"quant": "document"}, {"qual": "celul"}], "docs": ["rg", "cpf", "nasc"], "disp": ["comput"], "ID_disp": ["123456"]}
