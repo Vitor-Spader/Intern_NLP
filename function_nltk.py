@@ -2,14 +2,7 @@ import nltk,json
 import general_functions as f
 
 stopwords = nltk.corpus.stopwords.words('portuguese')
-'''
-legenda
-[det] determinante
-1- Quantidade de arquivo
-2- Quantidade de dispositivo
-3- Identificação do dispositivo
-4- Identificação do arquivo
-'''
+
 #base de dados
 def get_bd(mode="disp_tag_ID"):
     if mode == "docs":
@@ -19,23 +12,13 @@ def get_bd(mode="disp_tag_ID"):
     if mode == "disp_tag_ID":
         with open(r"data\lista_dispositivos.json","r") as x0:
             list_disp = json.load(x0)
-        with open(r"data\tags_doc_type.json","r") as x2:
-            doc_tag = json.load(x2)
-        with open(r"data\tags_disp.json","r") as x3:
-            disp_tag = json.load(x3)
-        with open(r"data\tags_det.json","r") as x4:
-            det_tag = json.load(x4)
-        with open(r"data\tags_intent.json","r") as x5:
-            intent_tag = json.load(x5)
-        return list_disp,doc_tag,disp_tag,det_tag,intent_tag
-
-#adiciona legenda a instancia que seja None no dicionario
-def dict_def(question,kword):
-    for x,y in question.items():
-        if x == "docs":
-            question[x].append(kword)
-            break
-    return question
+        with open(r"data\tags_disp.json","r") as x2:
+            disp_tag = json.load(x2)
+        with open(r"data\tags_det.json","r") as x3:
+            det_tag = json.load(x3)
+        with open(r"data\tags_intent.json","r") as x4:
+            intent_tag = json.load(x4)
+        return list_disp,disp_tag,det_tag,intent_tag
 
 def word_related(token_phrase,question):
     docs = get_bd(mode="docs")
@@ -45,10 +28,10 @@ def word_related(token_phrase,question):
         for z in y:
             if type(z) is list:
                 if all(v in token_phrase for v in x):
-                    question = dict_def(question,x)
+                    question["docs"].append(x)
                     break
             elif z in token_phrase:
-                question = dict_def(question,x)
+                question["docs"].append(x)
                 break
     return question
 
@@ -58,12 +41,14 @@ def return_question(token_phrase):
     #list_disp = lista de dispositivos(ID)
     #doc_tag = tags para documento e sinonimos
     #disp_tag = tags para tipos de dispositivos
-    list_disp,doc_tag,disp_tag,det_tag,intent_tag = get_bd()
+    list_disp,disp_tag,det_tag,intent_tag = get_bd()
 
     #inicializa vetor de retorno
     question = {"intent":[],"docs":[],"disp":[],"ID_disp":[]}
-    det = [] #tuplas com determinante e sua posição
-    intent = [] #tuplas com referencia da daterminante e sua posição
+    #tuplas com determinante e sua posição
+    det = []
+    #tuplas com referencia da daterminante e sua posição
+    intent = [] 
     det_aux = []
     intent_aux = []
     aux = []
@@ -101,7 +86,6 @@ def return_question(token_phrase):
         aux0 = [y]
         det_aux,intent_aux = f.less_equals(aux,det_aux,aux0,intent_aux)#retira os valores ja inseridos no dicionario
    
-
     for x in disp_tag:
         if x in token_phrase:
             if not f.test_exist(question,x):
@@ -113,9 +97,6 @@ def return_question(token_phrase):
 
     return question
         
-
-    
-
 #processa a frase restando somente o radical das palavras
 def aply_stemmer(token_phrase):
     stemmer = nltk.stem.RSLPStemmer()
